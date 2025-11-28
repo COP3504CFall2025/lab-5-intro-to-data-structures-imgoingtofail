@@ -159,7 +159,7 @@ public:
 
 	}
 
-	void Clear() {
+	void clear() {
 
 		Node* currentNode = this->head;
 		Node* thingo;
