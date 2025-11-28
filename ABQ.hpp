@@ -15,9 +15,9 @@ class ABQ : public QueueInterface<T>{
     // Constructors + Big 5
     ABQ() {
 
-        this->capacity_ = 1;
+        this->capacity_ = 2;
         this->curr_size_ = 0;
-        this->array_ = new T[1];
+        this->array_ = new T[];
         
     }
 
@@ -112,7 +112,7 @@ class ABQ : public QueueInterface<T>{
 
             this->capacity_ *= scale_factor_;
             T* thingo = new T[this->capacity_];
-            for(size_t i = 0; i < this->curr_size_; i++) { thingo[i] = this->array_[i]; }
+            for(size_t i = 0; i < (this->capacity_ / 2); i++) { thingo[i] = this->array_[i]; }
             delete[] this->array_;
             this->array_ = thingo;
 

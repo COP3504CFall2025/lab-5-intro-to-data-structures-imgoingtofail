@@ -12,8 +12,8 @@ class ABDQ : public DequeInterface<T> {
     // Big 5
     ABDQ() {
 
-        this->data_ = new T[2];
-        this->capacity_ = 2;
+        this->data_ = new T[4];
+        this->capacity_ = 4;
         this->size_ = 0;
         this->front_ = 0;
         this->back_ = 0;
