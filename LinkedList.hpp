@@ -39,28 +39,28 @@ public:
 
 	Node* getHead() { 
 
-		if(this->head == nullptr) { throw std::runtime_error("outta bounds"); }
+		if(this->head == nullptr) { throw std::out_of_range("outta range bruh"); }
 		return this->head; 
 	
 	} 
 
 	const Node* getHead() const { 
 		
-		if(this->head == nullptr) { throw std::runtime_error("outta bounds"); }
+		if(this->head == nullptr) { throw std::out_of_range("outta range bruh"); }
 		return this->head;
 	
 	}
 
 	Node* getTail() { 
 		
-		if(this->head == nullptr) { throw std::runtime_error("outta bounds"); }
+		if(this->head == nullptr) { throw std::out_of_range("outta range bruh"); }
 		return this->tail; 
 	
 	}
 
 	const Node* getTail() const { 
 
-		if(this->head == nullptr) { throw std::runtime_error("outta bounds"); }
+		if(this->head == nullptr) { throw std::out_of_range("outta range bruh"); }
 		return this->tail; 
 
 	}
@@ -102,20 +102,32 @@ public:
 
 	// Removal
 	bool removeHead() {
-		return this->head; 
+
+		if(this->head == nullptr) { 
+			return false;
+		} 
 
 		if(this->head == this->tail) {
 
-		return this->head;
+			delete this->head;
+			this->head = this->tail = nullptr;
+
+			count--;
 
 			return true;
 			
 		}
-		return this->tail; 
+
+		this->head = this->head->next;
+		delete this->head->prev;
+		this->head->prev = nullptr;
 
 		count--;
 
-		return this->tail; 
+		return true;
+
+	}
+
 	bool removeTail() {
 
 		if(this->head == nullptr) { 
@@ -269,8 +281,8 @@ private:
 		Node* next;
 		T data;
 
-		T& getData() { return this->data; }
-		const T& getData() const { return this->data; }
+		T getData() { return this->data; }
+		const T getData() { return this->data; }
 
 		// Node() : prev(nullptr), next(nullptr), data(NULL) {}
 		Node(const T& data) : prev(nullptr), next(nullptr), data(data) {}

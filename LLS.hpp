@@ -28,6 +28,7 @@ class LLS : public StackInterface<T> {
 
     // Access
     T peek() const override { 
+        
         if (this->list.getHead() == nullptr) { throw std::runtime_error("outta bounds"); }
         return this->list.getHead()->getData();
     
