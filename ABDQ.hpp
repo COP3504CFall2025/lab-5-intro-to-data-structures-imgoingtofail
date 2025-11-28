@@ -41,22 +41,19 @@ class ABDQ : public DequeInterface<T> {
 
     }
 
-    ABDQ(ABDQ&& other) noexcept {
-
-        delete[] this->data_; 
-
-        this->data_ = other.data_;
-        this->capacity_ = other.capacity_;
-        this->size_ = other.size_;
-        this->front_ = other.front_;
-        this->back_ = other.back_;
-
+    ABDQ(ABDQ&& other) noexcept
+        : data_(other.data_)
+        , capacity_(other.capacity_)
+        , size_(other.size_)
+        , front_(other.front_)
+        , back_(other.back_)
+    {
+        // steal resources from other; do not delete `this->data_` here
         other.data_ = nullptr;
         other.capacity_ = 1;
         other.size_ = 0;
         other.front_ = 0;
         other.back_ = 0;
-
     }
 
     ABDQ& operator=(const ABDQ& other) {
@@ -80,6 +77,9 @@ class ABDQ : public DequeInterface<T> {
     ABDQ& operator=(ABDQ&& other) noexcept {
 
         if(this == &other) { return *this; }
+
+        // free current resources then take ownership of other's
+        delete[] this->data_;
 
         this->data_ = other.data_;
         this->capacity_ = other.capacity_;
