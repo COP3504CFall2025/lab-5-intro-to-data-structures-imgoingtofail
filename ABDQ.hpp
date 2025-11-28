@@ -12,8 +12,8 @@ class ABDQ : public DequeInterface<T> {
     // Big 5
     ABDQ() {
 
-        this->data_ = new T[1];
-        this->capacity_ = 1;
+        this->data_ = new T[4];
+        this->capacity_ = 4;
         this->size_ = 0;
         this->front_ = 0;
         this->back_ = 0;
@@ -35,13 +35,15 @@ class ABDQ : public DequeInterface<T> {
         this->data_ = new T[other.capacity_];
         this->capacity_ = other.capacity_;
         this->size_ = other.size_;
-        for(int i = 0; i < other.size_; i++) { this->data_[i] = other.data_[(other.front_ + i) % capacity_]; }
+        for(size_t i = 0; i < other.size_; i++) { this->data_[i] = other.data_[(other.front_ + i) % capacity_]; }
         this->front_ = 0;
         this->back_ = size_;
 
     }
 
     ABDQ(ABDQ&& other) noexcept {
+
+        delete[] this->data_; 
 
         this->data_ = other.data_;
         this->capacity_ = other.capacity_;
@@ -69,7 +71,7 @@ class ABDQ : public DequeInterface<T> {
         this->size_ = other.size_;
         this->front_ = other.front_;
         this->back_ = other.back_;
-        for(size_t i = 0; i < other.capacity_; i++) { this->data_[(this->front_ + i) % capacity_] = other.data_[(other.front_ + i) % capacity_]; }
+        for(size_t i = 0; i < other.size_; i++) { this->data_[(this->front_ + i) % capacity_] = other.data_[(other.front_ + i) % capacity_]; }
 
         return *this;
 
@@ -194,7 +196,7 @@ class ABDQ : public DequeInterface<T> {
         T thingo = this->data_[(back_ - 1 + capacity_) % capacity_];
         // this->data_[this->size_ - 1] = NULL;
         size_--;
-        back_ = (back_ - 1) % capacity_;
+        back_ = (back_ - 1 + capacity_) % capacity_;
 
         return thingo;
 
@@ -203,14 +205,14 @@ class ABDQ : public DequeInterface<T> {
     // Access
     const T& front() const override { 
         
-        if(capacity_ == 0) { throw std::out_of_range("outta range bruh"); }
+        if(size_ == 0) { throw std::out_of_range("outta range bruh"); }
         return this->data_[front_]; 
     
     }
 
     const T& back() const override { 
         
-        if(capacity_ == 0) { throw std::out_of_range("outta range bruh"); }
+        if(size_ == 0) { throw std::out_of_range("outta range bruh"); }
         return this->data_[(back_ - 1 + capacity_) % capacity_]; 
     
     }
