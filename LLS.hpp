@@ -7,21 +7,33 @@
 
 template <typename T>
 class LLS : public StackInterface<T> {
-private:
+
+    private:
     LinkedList<T> list;
-public:
-    // Constructor
-    LLS();
+
+    public:    
+    LLS() = default;
 
     // Insertion
-    void push(const T& item) override;
+    void push(const T& item) override { this->list.addHead(item); }
 
     // Deletion
-    T pop() override;
+    T pop() override { 
+
+        T thingy = this->list.getHead()->getData();
+        this->list.removeHead();
+        return thingy;
+    
+    }
 
     // Access
-    T peek() const override;
+    T peek() const override { 
+
+        if (this->list.get() == nullptr) { throw std::out_of_range("outta range bruh"); }
+        this->list.getHead()->getData();
+    
+    }
 
     //Getters
-    std::size_t getSize() const noexcept override;
+    std::size_t getSize() const noexcept override { return list.getCount(); }
 };

@@ -7,22 +7,35 @@
 
 template <typename T>
 class LLQ : public QueueInterface<T> {
-private:
+
+    private:
     LinkedList<T> list;
-public:
+
+    public:
     // Constructor
-    LLQ();
+    LLQ() = default;
 
     // Insertion
-    void enqueue(const T& item) override;
+    void enqueue(const T& item) override { this->list.addTail(item); }
 
     // Deletion
-    T dequeue() override;
+    T dequeue() override { 
+        
+        T thingo = this->list.getHead()->getData();
+        this->list.removeHead(); 
+        return thingo;
+    
+    }
 
     // Access
-    T peek() const override;
+    T peek() const override { 
+        
+        if (list.getHead() == nullptr) { throw std::out_of_range("outta range bruh"); }
+        return this->list.getHead()->getData();
+    
+    }
 
     // Getter
-    std::size_t getSize() const noexcept override;
+    std::size_t getSize() const noexcept override { return this.list.getCount(); }
 
 };
