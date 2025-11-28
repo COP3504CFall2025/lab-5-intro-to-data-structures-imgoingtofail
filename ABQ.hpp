@@ -17,7 +17,7 @@ class ABQ : public QueueInterface<T>{
 
         this->capacity_ = 2;
         this->curr_size_ = 0;
-        this->array_ = new T[];
+        this->array_ = new T[2];
         
     }
 
@@ -140,8 +140,23 @@ class ABQ : public QueueInterface<T>{
         // this->array_[0] = NULL;
         for(size_t i = 1; i < this->curr_size_; i++) { this->array_[i-1] = this->array_[i]; }
         curr_size_--;
+        shrinkIfNeeded();
 
         return thingo;
+
+    }
+
+    void shrinkIfNeeded() {
+
+        if(curr_size_ <= this->capacity_ / 4 && this->capacity_ > 1) {
+
+            this->capacity_ /= scale_factor_;
+            T* thingo_shrink = new T[this->capacity_];
+            for(size_t i = 0; i < curr_size_; i++) { thingo_shrink[i] = this->array_[i]; }
+            delete[] this->array_;
+            this->array_ = thingo_shrink;
+
+        }
 
     }
 

@@ -185,6 +185,7 @@ class ABDQ : public DequeInterface<T> {
         // this->data_[0] = NULL;
         size_--;
         front_ = (front_ + 1) % capacity_;
+        shrinkIfNeeded();
 
         return thingo;
 
@@ -198,6 +199,7 @@ class ABDQ : public DequeInterface<T> {
         // this->data_[this->size_ - 1] = NULL;
         size_--;
         back_ = (back_ - 1 + capacity_) % capacity_;
+        shrinkIfNeeded();
 
         return thingo;
 
@@ -220,6 +222,25 @@ class ABDQ : public DequeInterface<T> {
 
     // Getters
     std::size_t getSize() const noexcept override { return this->size_; }
+
+    void shrinkIfNeeded() {
+
+        if(size_ <= capacity_ / 4 && capacity_ > 1) {
+
+            size_t newCapacity = capacity_ / SCALE_FACTOR;
+            T* newData = new T[newCapacity];
+            
+            for(size_t i = 0; i < size_; i++) { newData[i] = this->data_[(front_ + i) % capacity_]; }
+            
+            delete[] this->data_;
+            this->data_ = newData;
+            this->capacity_ = newCapacity;
+            this->front_ = 0;
+            this->back_ = size_;
+
+        }
+
+    }
 
     private:
     T* data_;                 // underlying dynamic array
