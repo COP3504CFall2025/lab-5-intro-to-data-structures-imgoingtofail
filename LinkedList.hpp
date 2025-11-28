@@ -159,6 +159,24 @@ public:
 
 	}
 
+	void Clear() {
+
+		Node* currentNode = this->head;
+		Node* thingo;
+
+		while(currentNode != nullptr) {
+		
+			thingo = currentNode->next;
+			delete currentNode;
+			currentNode = thingo;
+
+		}
+
+		this->head = this->tail = nullptr;
+        this->count = 0;
+
+	}
+
 	void clear() {
 
 		Node* currentNode = this->head;
