@@ -129,14 +129,14 @@ public:
 
     T peek() const override { 
         
-        if (curr_size_ == 0) { throw std::out_of_range("outta range bruh"); }
+        if (curr_size_ == 0) { throw std::runtime_error(); }
         return this->array_[this->curr_size_ - 1];
     
     }
 
     T pop() override {
 
-        if(curr_size_ == 0) { throw std::out_of_range("outta range bruh"); }
+        if(curr_size_ == 0) { throw std::runtime_error(); }
 
         T thingo = this->array_[this->curr_size_ - 1];
         // this->array_[this->curr_size_ - 1] = NULL;

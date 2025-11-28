@@ -30,7 +30,7 @@ class LLQ : public QueueInterface<T> {
     // Access
     T peek() const override { 
         
-        if (list.getHead() == nullptr) { throw std::out_of_range("outta range bruh"); }
+        if (list.getHead() == nullptr) { throw std::runtime_error(); }
         return this->list.getHead()->getData();
     
     }

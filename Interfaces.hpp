@@ -10,7 +10,7 @@ class StackInterface {
     public:
         
     virtual void push(const T& item) = 0;
-    virtual pop() = 0;
+    virtual T pop() = 0;
     virtual T peek() const = 0;
     virtual std::size_t getSize() const noexcept = 0;
     virtual ~StackInterface() = default;

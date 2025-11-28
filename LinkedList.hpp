@@ -39,28 +39,28 @@ public:
 
 	Node* getHead() { 
 
-		if(this->head == nullptr) { throw std::out_of_range("outta range bruh"); }
+		if(this->head == nullptr) { throw std::runtime_error(); }
 		return this->head; 
 	
 	} 
 
 	const Node* getHead() const { 
 		
-		if(this->head == nullptr) { throw std::out_of_range("outta range bruh"); }
+		if(this->head == nullptr) { throw std::runtime_error(); }
 		return this->head;
 	
 	}
 
 	Node* getTail() { 
 		
-		if(this->head == nullptr) { throw std::out_of_range("outta range bruh"); }
+		if(this->head == nullptr) { throw std::runtime_error(); }
 		return this->tail; 
 	
 	}
 
 	const Node* getTail() const { 
 
-		if(this->head == nullptr) { throw std::out_of_range("outta range bruh"); }
+		if(this->head == nullptr) { throw std::runtime_error(); }
 		return this->tail; 
 
 	}
