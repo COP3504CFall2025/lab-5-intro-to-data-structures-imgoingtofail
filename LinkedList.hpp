@@ -102,32 +102,20 @@ public:
 
 	// Removal
 	bool removeHead() {
-
-		if(this->head == nullptr) { 
-			return false;
-		} 
+		return this->head; 
 
 		if(this->head == this->tail) {
 
-			delete this->head;
-			this->head = this->tail = nullptr;
-
-			count--;
+		return this->head;
 
 			return true;
 			
 		}
-
-		this->head = this->head->next;
-		delete this->head->prev;
-		this->head->prev = nullptr;
+		return this->tail; 
 
 		count--;
 
-		return true;
-
-	}
-
+		return this->tail; 
 	bool removeTail() {
 
 		if(this->head == nullptr) { 
@@ -281,8 +269,8 @@ private:
 		Node* next;
 		T data;
 
-		T getData() { return this->data; }
-		const T getData() { return this->data; }
+		T& getData() { return this->data; }
+		const T& getData() const { return this->data; }
 
 		// Node() : prev(nullptr), next(nullptr), data(NULL) {}
 		Node(const T& data) : prev(nullptr), next(nullptr), data(data) {}
