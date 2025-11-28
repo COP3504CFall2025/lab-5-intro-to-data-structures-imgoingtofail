@@ -20,6 +20,7 @@ class LLS : public StackInterface<T> {
     // Deletion
     T pop() override { 
 
+        if (this->list.getHead() == nullptr) { throw std::runtime_error("outta bounds"); }
         T thingy = this->list.getHead()->getData();
         this->list.removeHead();
         return thingy;

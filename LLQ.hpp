@@ -21,6 +21,7 @@ class LLQ : public QueueInterface<T> {
     // Deletion
     T dequeue() override { 
         
+        if (this->list.getHead() == nullptr) { throw std::runtime_error("outta bounds"); }
         T thingo = this->list.getHead()->getData();
         this->list.removeHead(); 
         return thingo;
@@ -36,6 +37,6 @@ class LLQ : public QueueInterface<T> {
     }
 
     // Getter
-    std::size_t getSize() const noexcept override { return this.list.getCount(); }
+    std::size_t getSize() const noexcept override { return this->list.getCount(); }
 
 };

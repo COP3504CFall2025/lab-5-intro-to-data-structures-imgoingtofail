@@ -25,6 +25,7 @@ public:
     // Core Removal Operations
     T popFront() override { 
 
+        if (this->list.getHead() == nullptr) { throw std::runtime_error("outta bounds"); }
         T thingy = this->list.getHead()->getData();
         this->list.removeHead();
         return thingy;
@@ -33,6 +34,7 @@ public:
 
     T popBack() override {
 
+        if (this->list.getTail() == nullptr) { throw std::runtime_error("outta bounds"); }
         T thingo = this->list.getTail()->getData();
         this->list.removeTail();
         return thingo;
@@ -40,8 +42,14 @@ public:
     }
 
     // Element Accessors
-    const T& front() const override { return this->list.getHead()->getData(); }
-    const T& back() const override { return this->list.getTail()->getData(); }
+    const T& front() const override { 
+        if (this->list.getHead() == nullptr) { throw std::runtime_error("outta bounds"); }
+        return this->list.getHead()->getData();
+    }
+    const T& back() const override { 
+        if (this->list.getTail() == nullptr) { throw std::runtime_error("outta bounds"); }
+        return this->list.getTail()->getData();
+    }
 
     // Getter
     std::size_t getSize() const noexcept override { return this->list.getCount(); }
