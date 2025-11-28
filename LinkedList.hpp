@@ -7,6 +7,22 @@ class LinkedList {
 
 public:
 
+	struct Node {
+
+		Node* prev;
+		Node* next;
+		T data;
+
+		T& getData() { return this->data; }
+		const T& getData() const { return this->data; }
+
+		// Node() : prev(nullptr), next(nullptr), data(NULL) {}
+		Node(const T& data) : prev(nullptr), next(nullptr), data(data) {}
+		Node(Node* previous, Node* next, const T& data) : prev(previous), next(next), data(data) {}
+		// ~Node() { delete data; }
+
+	};
+
 	// Behaviors
 	void printForward() const {
 
@@ -262,22 +278,6 @@ public:
 	}
 
 private:
-
-	struct Node {
-
-		Node* prev;
-		Node* next;
-		T data;
-
-		T& getData() { return this->data; }
-		const T& getData() const { return this->data; }
-
-		// Node() : prev(nullptr), next(nullptr), data(NULL) {}
-		Node(const T& data) : prev(nullptr), next(nullptr), data(data) {}
-		Node(Node* previous, Node* next, const T& data) : prev(previous), next(next), data(data) {}
-		// ~Node() { delete data; }
-
-	};
 
 	// Stores pointers to first and last nodes and count
 	Node* head;
