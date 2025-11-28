@@ -178,7 +178,7 @@ class ABDQ : public DequeInterface<T> {
     // Deletion
     T popFront() override {
 
-        if(size_ == 0 || capacity_ == 0) { throw std::runtime_error(); }
+        if(size_ == 0 || capacity_ == 0) { throw std::runtime_error(""); }
 
         T thingo = this->data_[front_];
         // this->data_[0] = NULL;
@@ -191,7 +191,7 @@ class ABDQ : public DequeInterface<T> {
 
     T popBack() override {
 
-        if(size_ == 0 || capacity_ == 0) { throw std::runtime_error(); }
+        if(size_ == 0 || capacity_ == 0) { throw std::runtime_error(""); }
 
         T thingo = this->data_[(back_ - 1 + capacity_) % capacity_];
         // this->data_[this->size_ - 1] = NULL;
@@ -205,14 +205,14 @@ class ABDQ : public DequeInterface<T> {
     // Access
     const T& front() const override { 
         
-        if(size_ == 0) { throw std::runtime_error(); }
+        if(size_ == 0) { throw std::runtime_error(""); }
         return this->data_[front_]; 
     
     }
 
     const T& back() const override { 
         
-        if(size_ == 0) { throw std::runtime_error(); }
+        if(size_ == 0) { throw std::runtime_error(""); }
         return this->data_[(back_ - 1 + capacity_) % capacity_]; 
     
     }

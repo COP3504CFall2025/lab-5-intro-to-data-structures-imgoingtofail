@@ -29,7 +29,7 @@ class LLS : public StackInterface<T> {
     // Access
     T peek() const override { 
 
-        if (this->list.get() == nullptr) { throw std::runtime_error(); }
+        if (this->list.get() == nullptr) { throw std::runtime_error("outta bounds"); }
         this->list.getHead()->getData();
     
     }

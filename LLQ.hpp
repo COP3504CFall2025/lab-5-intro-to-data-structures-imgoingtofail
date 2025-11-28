@@ -30,7 +30,7 @@ class LLQ : public QueueInterface<T> {
     // Access
     T peek() const override { 
         
-        if (list.getHead() == nullptr) { throw std::runtime_error(); }
+        if (list.getHead() == nullptr) { throw std::runtime_error("outta bounds"); }
         return this->list.getHead()->getData();
     
     }
