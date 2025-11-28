@@ -126,7 +126,7 @@ class ABQ : public QueueInterface<T>{
     // Access
     T peek() const override { 
         
-        if (curr_size_ == 0) { throw std::runtime_error(""); }
+        if (curr_size_ == 0) { throw std::runtime_error("outta bounds"); }
         return this->array_[0]; 
     
     }
@@ -134,7 +134,7 @@ class ABQ : public QueueInterface<T>{
     // Deletion
     T dequeue() override {
 
-        if(curr_size_ == 0 || capacity_ == 0) { throw std::runtime_error(""); }
+        if(curr_size_ == 0 || capacity_ == 0) { throw std::runtime_error("outta bounds"); }
 
         T thingo = this->array_[0];
         // this->array_[0] = NULL;

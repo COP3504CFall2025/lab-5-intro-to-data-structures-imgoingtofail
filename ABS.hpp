@@ -129,14 +129,14 @@ public:
 
     T peek() const override { 
         
-        if (curr_size_ == 0) { throw std::runtime_error(""); }
+        if (curr_size_ == 0) { throw std::runtime_error("outta bounds"); }
         return this->array_[this->curr_size_ - 1];
     
     }
 
     T pop() override {
 
-        if(curr_size_ == 0) { throw std::runtime_error(""); }
+        if(curr_size_ == 0) { throw std::runtime_error("outta bounds"); }
 
         T thingo = this->array_[this->curr_size_ - 1];
         // this->array_[this->curr_size_ - 1] = NULL;
